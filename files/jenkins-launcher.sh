@@ -11,6 +11,9 @@ JAVA_ARGS="-Djava.awt.headless=true"  # Allow graphs etc. to work even when an X
 #JAVA_ARGS="-Xmx256m"
 #JAVA_ARGS="-Djava.net.preferIPv4Stack=true" # make jenkins listen on IPv4 address
 
+JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.DownloadService.never=true"
+JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.UpdateCenter.never=true"
+
 PIDFILE=/var/run/jenkins/jenkins.pid
 
 # user id to be invoked as (otherwise will run as root; not wise!)
@@ -59,5 +62,3 @@ PREFIX=/jenkins
 
 JENKINS_ARGS="--webroot=/var/cache/jenkins/war --httpPort=$HTTP_PORT --ajp13Port=$AJP_PORT"
 JENKINS_ARGS="${JENKINS_ARGS} --httpListenAddress=127.0.0.1"
-JENKINS_ARGS="${JENKINS_ARGS} -Dhudson.model.DownloadService.never=true"
-JENKINS_ARGS="${JENKINS_ARGS} -Dhudson.model.UpdateCenter.never=true"
