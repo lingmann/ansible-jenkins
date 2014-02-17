@@ -1,6 +1,6 @@
 ---
 # Add Jenkins repository
-- include: repo.yml 
+- include: repo.yml
   when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
 
 # Install dependencies
@@ -13,6 +13,13 @@
   action: ${ansible_pkg_mgr} pkg=jenkins state=latest update-cache=yes
   when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
   register: jenkins_install
+
+- name: Configure Jenkins
+  sudo: yes
+  copy: src=jenkins-launcher.sh dest=/etc/default/jenkins
+  when: ansible_distribution in [ 'Debian', 'Ubuntu' ]
+  notify:
+  - Restart Jenkins
 
 # Install Jenkins cli
 - include: cli.yml
