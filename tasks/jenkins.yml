@@ -21,6 +21,10 @@
   notify:
   - Restart Jenkins
 
+- name: Generate an SSH key for the jenkins user
+  sudo: yes
+  user: name=jenkins state=present generate_ssh_key=yes home=/var/lib/jenkins
+
 # Install Jenkins cli
 - include: cli.yml
 
